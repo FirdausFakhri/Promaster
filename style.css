@@ -1,0 +1,737 @@
+/* =========================================
+   1. VARIABLES & RESET (Corporate Theme)
+   ========================================= */
+:root {
+    /* Corporate Blue & Red Palette */
+    --color-primary: #002366; /* Royal Blue */
+    --color-secondary: #f4f6f8; /* Light Grey Background */
+    --color-accent: #b71c1c; /* Strong Red for actions */
+    --color-text-dark: #333333;
+    --color-text-light: #ffffff;
+    --color-border: #e0e0e0;
+    
+    --font-main: 'Roboto', sans-serif;
+    
+    --spacing-section: 80px;
+    --border-radius: 4px; /* Sharper corners for a "disciplined" look */
+    --shadow-card: 0 4px 12px rgba(0, 35, 102, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-secondary);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    color: var(--color-primary);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+a {
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+/* Utility Classes */
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padding {
+    padding: var(--spacing-section) 0;
+}
+
+.text-center { text-align: center; }
+.text-white { color: var(--color-text-light); }
+.text-accent { color: var(--color-accent); }
+
+/* Section Titles */
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-accent);
+}
+
+.section-header p {
+    max-width: 600px;
+    margin: 10px auto 0;
+    font-size: 1.1rem;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    color: white;
+    border: 2px solid var(--color-accent);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--color-accent);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--color-text-light);
+    color: var(--color-text-light);
+}
+
+.btn-outline:hover {
+    background-color: var(--color-text-light);
+    color: var(--color-primary);
+}
+
+/* =========================================
+   2. HEADER & NAVIGATION
+   ========================================= */
+header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+.logo span {
+    color: var(--color-accent);
+    font-size: 0.8em;
+    display: block;
+    letter-spacing: 2px;
+    font-weight: 400;
+}
+
+.logo {
+    display: flex; /* Aligns the image and h1 side-by-side */
+    align-items: center; /* Vertically centers them */
+    gap: 10px; /* Space between logo image and text */
+}
+
+.nav-logo {
+    height: 80px; /* Set a standard height for the logo in the nav bar */
+    width: auto;
+    transition: transform 0.3s ease-in-out; /* Enable smooth transition for the hover effect */
+}
+
+.logo h1 {
+    /* Existing styles, just ensure margin is zeroed out for flex alignment */
+    font-size: 1.8rem;
+    margin: 0; 
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+/* Hover Effect for Logo */
+.nav-logo:hover {
+    transform: scale(2.5); /* Enlarges the logo by 20% */
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-list li a {
+    color: var(--color-primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 5px 0;
+    position: relative;
+}
+
+.nav-list li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-accent);
+    transition: width 0.3s;
+}
+
+.nav-list li a:hover::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    cursor: pointer;
+}
+
+/* =========================================
+   3. HERO SECTION
+   ========================================= */
+/*.hero-section {
+    position: relative;
+    height: 90vh; /* Slightly shorter than full screen *//*
+    background: linear-gradient(to right, rgba(0, 35, 102, 0.9), rgba(0, 35, 102, 0.6)), url('https://images.unsplash.com/photo-1555296684-e718a8a69022?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    color: white;
+}*/
+
+/* style.css */
+
+.hero-section {
+    position: relative; /* Needed for the overlay */
+    background-image: url('images/background2.jpg'); /* REPLACE with the actual image URL */
+    background-size: cover; /* Ensures the image covers the entire section */
+    background-position: center center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    color: #fff; /* Ensure text is white for better contrast */
+    text-align: center;
+    padding: 150px 20px;
+    height: 100vh; /* Make it full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Add a new overlay style for better text readability */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay (adjust alpha for darkness) */
+    z-index: 1; /* Place it above the background image */
+}
+
+.hero-section .hero-content {
+    position: relative; /* Place content above the overlay */
+    z-index: 2;
+}
+
+.hero-section h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.hero-section p {
+    font-size: 1.2em;
+    max-width: 800px;
+    margin-bottom: 30px;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero-badge {
+    background-color: var(--color-accent);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 1;
+    font-weight: 300;
+    color: var(--color-text-light); /* This line explicitly sets the color to red */
+}
+
+/* =========================================
+   4. ABOUT SECTION
+   ========================================= */
+
+/* --- NEW Background Image for About Section --- */
+.about-bg {
+    position: relative;
+    /* CHANGE 'corporate-texture.jpg' to your actual image file name */
+    background: url('images/logo3d.png') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed; /* Optional: Gives a subtle parallax effect */
+    z-index: 1; /* For stacking context */
+}
+
+/* Add a semi-transparent white overlay for text readability */
+.about-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 90% opaque white overlay (adjust alpha value for desired brightness) */
+    background-color: rgba(255, 255, 255, 0.9); 
+    z-index: 2;
+}
+
+/* Ensure all content within the section sits above the overlay */
+.about-bg .container {
+    position: relative;
+    z-index: 3;
+}
+/* ----------------------------------------------- */
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-image-wrapper {
+    position: relative;
+}
+
+.about-image-wrapper img {
+    width: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-card);
+}
+
+/* Decorative box behind image */
+.about-image-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100px;
+    height: 100px;
+    background-color: var(--color-accent);
+    z-index: -1;
+    border-radius: var(--border-radius);
+}
+
+.motto-box {
+    background-color: white;
+    padding: 20px;
+    border-left: 4px solid var(--color-accent);
+    margin: 20px 0;
+    box-shadow: var(--shadow-card);
+}
+
+.motto-box strong {
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* =========================================
+   5. SERVICES SECTION
+   ========================================= */
+.services-section {
+    background-color: #ffffff;
+}
+
+.services-grid {
+    display: grid;
+    /*grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+    grid-template-columns: 1fr 1fr;
+    gap: 40px; /* Increased gap from 30px to 40px */
+}
+
+/* 2. Clean up the default service card */
+.service-card {
+    background: #ffffff; /* Changed from var(--color-secondary) to pure white */
+    padding: 30px;
+    border-radius: var(--border-radius);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    border: 1px solid var(--color-border); /* Added a light border for definition */
+    border-top: 3px solid var(--color-primary); /* Use Primary Blue for the base top border */
+}
+
+/* 3. Enhance the hover effect */
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 35, 102, 0.15); /* Stronger shadow for lift */
+    border-top: 3px solid var(--color-accent); /* Accent Red border on hover */
+    /* Remove background: white; which is now the default */
+    background: #ffffff; /* Keep background white */
+}
+
+/* 4. Tweak the service icon background */
+.service-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(0, 35, 102, 0.1);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    transition: 0.3s;
+    /* Keep existing styles */
+    background-color: var(--color-secondary); /* Keep light grey for contrast with the white card */
+}
+
+.service-card:hover .service-icon {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.service-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+/* 5. Tweak the service list items */
+.service-list {
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.95rem; /* Slightly larger font for readability */
+}
+
+.service-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.service-list li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: bold;
+    font-size: 1.2em;
+    line-height: 1;
+}
+
+/* In style.css, under 5. SERVICES SECTION */
+.services-section {
+    position: relative; /* Crucial for overlay positioning */
+    /* *** ADD YOUR IMAGE HERE *** */
+    /* Change 'security-pattern-services.jpg' to your actual image file name or URL */
+    background: url('images/guard-training5.jpeg') no-repeat center center; 
+    background-size: cover;
+    background-attachment: fixed; /* Optional: Gives a subtle parallax effect */
+    padding: var(--spacing-section) 0;
+    z-index: 1; 
+}
+
+/* Translucent white overlay to ensure dark text and cards remain legible */
+.services-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Subtle white overlay (95% opaque) to mute the background image */
+    background-color: rgba(255, 255, 255, 0.8); 
+    z-index: 2;
+}
+
+/* Ensure the content itself is above the overlay */
+.services-section .container {
+    position: relative;
+    z-index: 3;
+}
+
+/* =========================================
+   6. CREDENTIALS / STATS
+   ========================================= */
+.credentials-bar {
+    background-color: var(--color-primary);
+    padding: 50px 0;
+    color: white;
+}
+
+.credentials-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+.credential-item h3 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+.credential-item p {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   7. LICENSES & ISO
+   ========================================= */
+
+.licenses-grid {
+    display: grid;
+    /* --- CHANGE THIS LINE --- */
+    grid-template-columns: repeat(3, 1fr); 
+    /* ------------------------ */
+    gap: 30px; 
+    max-width: 900px; /* Optional: Constrains the grid width slightly */
+    margin: 0 auto; /* Optional: Centers the grid itself */
+}
+.license-card {
+    background: white;
+    border: 1px solid var(--color-border);
+    padding: 25px;
+    text-align: center;
+    border-radius: var(--border-radius);
+    transition: 0.3s;
+    /* Ensure cards have consistent height for alignment */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.license-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-card);
+}
+
+/* --- NEW Image/Logo Sizing Rule --- */
+.license-card .cert-logo {
+    width: 100%;
+    max-width: 150px; /* Maximum width of the logo/cert image */
+    height: auto;
+    object-fit: contain; /* Ensures the whole image is visible without stretching */
+    margin: 0 auto 15px; /* Center the image and add bottom margin */
+    /* Add a minimum height to prevent large KDN/PDRM logos from forcing different card heights */
+    min-height: 100px; 
+    display: block; /* Ensure margin auto works */
+}
+
+/* Remove or update the unused .license-icon styles if you switch to images */
+.license-icon {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+}
+
+.license-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.license-desc {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+/* DELETE all the confusing repeated and centered license-grid rules */
+/* Remove the blocks of code starting from: */
+/* .licenses-grid { display: grid; /* Uses three columns for larger screens... */ 
+/* and ending with: */
+/* .compliance-note p { font-style: italic; font-size: 0.9em; color: rgba(255, 255, 255, 0.6); } */
+/* These rules seem to conflict with the initial setup. */
+
+.compliance-note {
+    text-align: center;
+    margin-top: 40px; /* Space above the note */
+    padding-top: 15px;
+    border-top: 1px solid var(--color-border); /* Subtle line above the note */
+}
+
+.compliance-note p {
+    font-size: 0.9rem;
+    color: #666; /* Slightly darker text for readability */
+    font-style: italic; /* Emphasize that it's a note */
+    margin-bottom: 0; /* Remove default paragraph margin */
+}
+
+
+/* =========================================
+   8. CONTACT
+   ========================================= */
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    background: white;
+    box-shadow: var(--shadow-card);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.contact-details {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 40px;
+}
+
+.contact-details h3 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.info-item i {
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    margin-right: 15px;
+    margin-top: 5px;
+}
+
+.info-item p {
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 0;
+}
+
+.map-frame {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+}
+
+/* =========================================
+   9. FOOTER
+   ========================================= */
+footer {
+    background-color: #0a1025; /* Very dark blue */
+    color: #8890a6;
+    padding: 40px 0 20px;
+    font-size: 0.9rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 20px;
+}
+
+.footer-logo {
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 992px) {
+    .about-grid, .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-title { font-size: 2.8rem; }
+    
+    .credentials-grid { grid-template-columns: repeat(2, 1fr); }
+    
+    .menu-toggle { display: block; }
+    
+    .nav-list {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        gap: 15px;
+    }
+    
+    .nav-list.active { display: flex; }
+}
+
+@media (max-width: 576px) {
+    .hero-title { font-size: 2rem; }
+    .section-header h2 { font-size: 1.8rem; }
+    .credentials-grid { grid-template-columns: 1fr; }
+}
